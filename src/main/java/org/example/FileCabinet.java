@@ -43,12 +43,29 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public int count() {
-        int count = folders.size();
+        int count = 0;
+        System.out.println(count);
         for (int i = 0; i < folders.size(); i++) {
-            if (folders.get(i) instanceof MultiFolder){
-                count+=  folders.get(i).getFolders().size();
-            }
+           count+= recursionCount(folders.get(i));
         }
-        return ;
+        return count;
+    }
+
+    public int recursionCount(Folder folder) {
+        int count2 = 1;
+        if (!(folder instanceof MultiFolder multiFolder)) {
+            return count2;
+        } else {
+//            for(Folder folder1 : multiFolder.getFolders()) {
+//                count2 += recursionCount(folder1);
+//            }
+
+            for (int i = 0; i < multiFolder.getFolders().size(); i++) {
+               count2+=  recursionCount( multiFolder.getFolders().get(i));
+
+            }
+            return count2;
+        }
+
     }
 }

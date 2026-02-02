@@ -30,4 +30,12 @@ public class FolderImpl implements Folder{
     public String getSize() {
         return size;
     }
+
+    @Override
+    public String toString() {
+        return "FolderImpl{" +
+                "name='" + name + '\'' +
+                ", size='" + size + '\'' +
+                '}';
+    }
 }
