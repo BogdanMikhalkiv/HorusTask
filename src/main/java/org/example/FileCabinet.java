@@ -6,8 +6,11 @@ import java.util.Optional;
 public class FileCabinet implements Cabinet {
     private List<Folder> folders;
 
+
+
     public FileCabinet(List<Folder> folders) {
         this.folders = folders;
+
     }
 
     public FileCabinet(){
@@ -40,6 +43,12 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public int count() {
-        return 0;
+        int count = folders.size();
+        for (int i = 0; i < folders.size(); i++) {
+            if (folders.get(i) instanceof MultiFolder){
+                count+=  folders.get(i).getFolders().size();
+            }
+        }
+        return ;
     }
 }
