@@ -34,6 +34,6 @@ public class MultiFolderImpl  implements MultiFolder{
                 "name='" + name + '\'' +
                 ", size='" + size + '\'' +
                 ", folders=" + folders +
-                '}';
+                '}' + "\n";
     }
 }

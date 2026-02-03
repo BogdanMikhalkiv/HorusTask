@@ -36,6 +36,6 @@ public class FolderImpl implements Folder{
         return "FolderImpl{" +
                 "name='" + name + '\'' +
                 ", size='" + size + '\'' +
-                '}';
+                '}' + "\n";
     }
 }

@@ -23,7 +23,9 @@ public class Main {
 
         System.out.println(fileCabinet.count());
 
-        System.out.println(fileCabinet.findFolderByName("multifolder1"));
+        System.out.println(fileCabinet.findFolderByName("4"));
+
+        System.out.println(fileCabinet.findFoldersBySize("small"));
 
 
     }

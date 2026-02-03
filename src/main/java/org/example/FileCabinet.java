@@ -63,10 +63,8 @@ public class FileCabinet implements Cabinet {
     }
 
     public void innerRecursiveLoop (List<Folder> recursiveList, Folder folder) {
-        if (!(folder instanceof MultiFolder multiFolder)) {
-             recursiveList.add(folder);
-        } else {
-            recursiveList.add(multiFolder);
+        recursiveList.add(folder);
+        if (folder instanceof MultiFolder multiFolder) {
             for (int i = 0; i < multiFolder.getFolders().size(); i++) {
                 innerRecursiveLoop(recursiveList, multiFolder.getFolders().get(i));
             }
