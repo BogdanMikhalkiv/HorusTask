@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,16 +28,18 @@ public class FileCabinet implements Cabinet {
 
     @Override
     public Optional<Folder> findFolderByName(String name) {
+        List<Folder> recursiveList = outerLoop(folders);
         Optional<Folder> folderOptional = Optional.ofNullable(
-                folders.stream()
+                recursiveList.stream()
                         .filter(f -> f.getName().equals(name)).findFirst().orElse(null));
         return folderOptional;
     }
 
     @Override
     public List<Folder> findFoldersBySize(String size) {
+        List<Folder> recursiveList = outerLoop(folders);
         List<Folder> folderOptional =
-                folders.stream()
+                recursiveList.stream()
                         .filter(f -> f.getSize().equals(size)).toList();
         return folderOptional;
     }
@@ -51,18 +54,32 @@ public class FileCabinet implements Cabinet {
         return count;
     }
 
+    public List<Folder> outerLoop(List<Folder> folders) {
+        List<Folder> recursiveList = new ArrayList<>();
+        for (int i = 0; i < folders.size(); i++) {
+            innerRecursiveLoop(recursiveList, folders.get(i));
+        }
+        return recursiveList;
+    }
+
+    public void innerRecursiveLoop (List<Folder> recursiveList, Folder folder) {
+        if (!(folder instanceof MultiFolder multiFolder)) {
+             recursiveList.add(folder);
+        } else {
+            recursiveList.add(multiFolder);
+            for (int i = 0; i < multiFolder.getFolders().size(); i++) {
+                innerRecursiveLoop(recursiveList, multiFolder.getFolders().get(i));
+            }
+        }
+    }
+
     public int recursionCount(Folder folder) {
         int count2 = 1;
         if (!(folder instanceof MultiFolder multiFolder)) {
             return count2;
         } else {
-//            for(Folder folder1 : multiFolder.getFolders()) {
-//                count2 += recursionCount(folder1);
-//            }
-
             for (int i = 0; i < multiFolder.getFolders().size(); i++) {
                count2+=  recursionCount( multiFolder.getFolders().get(i));
-
             }
             return count2;
         }
