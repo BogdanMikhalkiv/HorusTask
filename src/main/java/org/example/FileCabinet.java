@@ -8,13 +8,12 @@ public class FileCabinet implements Cabinet {
     private List<Folder> folders;
 
 
-
     public FileCabinet(List<Folder> folders) {
         this.folders = folders;
 
     }
 
-    public FileCabinet(){
+    public FileCabinet() {
 
     }
 
@@ -49,7 +48,7 @@ public class FileCabinet implements Cabinet {
         int count = 0;
         System.out.println(count);
         for (int i = 0; i < folders.size(); i++) {
-           count+= recursionCount(folders.get(i));
+            count += recursionCount(folders.get(i));
         }
         return count;
     }
@@ -62,7 +61,7 @@ public class FileCabinet implements Cabinet {
         return recursiveList;
     }
 
-    public void innerRecursiveLoop (List<Folder> recursiveList, Folder folder) {
+    public void innerRecursiveLoop(List<Folder> recursiveList, Folder folder) {
         recursiveList.add(folder);
         if (folder instanceof MultiFolder multiFolder) {
             for (int i = 0; i < multiFolder.getFolders().size(); i++) {
@@ -77,7 +76,7 @@ public class FileCabinet implements Cabinet {
             return count2;
         } else {
             for (int i = 0; i < multiFolder.getFolders().size(); i++) {
-               count2+=  recursionCount( multiFolder.getFolders().get(i));
+                count2 += recursionCount(multiFolder.getFolders().get(i));
             }
             return count2;
         }
